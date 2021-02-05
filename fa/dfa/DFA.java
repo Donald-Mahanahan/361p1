@@ -8,19 +8,18 @@ import java.util.HashSet;
 import java.util.Iterator;
 import fa.State;
 
-
-
 public class DFA implements DFAInterface {
 
-
-	//store start state
-	//store final
-	//store alpha
-	//store states
-	//store transitions
-
-	
-
+	// store start state
+	private Set startSet;
+	// store final
+	private Set finalState;
+	// store alpha
+	private Set alphabet;
+	// store states
+	private Set states;
+	// store transitions
+	private HashMap<Set, String> transitions;
 
 	/**
 	 * Construct the textual representation of the DFA, for example
@@ -41,7 +40,7 @@ public class DFA implements DFAInterface {
 	public abstract String toString() {
 
     }
-	
+
 	/**
 	 * Simulates a DFA on input s to determine
 	 * whether the DFA accepts s.
@@ -51,7 +50,7 @@ public class DFA implements DFAInterface {
 	public abstract boolean accepts(String s) {
 
     }
-	
+
 	/**
 	 * Uses transition function delta of FA
 	 * @param from the source state
@@ -62,24 +61,26 @@ public class DFA implements DFAInterface {
 
     }
 
-    	/**
+	/**
 	 * Adds the initial state to the DFA instance
+	 * 
 	 * @param name is the label of the start state
 	 */
 	public abstract void addStartState(String name);
 
 	/**
 	 * Adds a non-final, not initial state to the DFA instance
-	 * @param name is the label of the state 
+	 * 
+	 * @param name is the label of the state
 	 */
 	public abstract void addState(String name);
 
 	/**
 	 * Adds a final state to the DFA
+	 * 
 	 * @param name is the label of the state
 	 */
 	public abstract void addFinalState(String name);
-
 
 	/**
 	 * Adds the transition to the DFA's delta data structure
@@ -90,7 +91,7 @@ public class DFA implements DFAInterface {
 	public abstract void addTransition(String fromState, char onSymb, String toState) {
 
     }
-	
+
 	/**
 	 * Getter for Q
 	 * @return a set of states that FA has
@@ -98,7 +99,7 @@ public class DFA implements DFAInterface {
 	public abstract Set<? extends State> getStates(){
 
     }
-	
+
 	/**
 	 * Getter for F
 	 * @return a set of final states that FA has
@@ -106,7 +107,7 @@ public class DFA implements DFAInterface {
 	public abstract Set<? extends State> getFinalStates(){
 
     }
-	
+
 	/**
 	 * Getter for q0
 	 * @return the start state of FA
@@ -114,7 +115,7 @@ public class DFA implements DFAInterface {
 	public abstract State getStartState(){
 
     }
-	
+
 	/**
 	 * Getter for Sigma
 	 * @return the alphabet of FA
@@ -122,6 +123,5 @@ public class DFA implements DFAInterface {
 	public abstract Set<Character> getABC(){
 
     }
-
 
 }
