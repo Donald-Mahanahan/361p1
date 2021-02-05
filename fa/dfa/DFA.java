@@ -11,8 +11,18 @@ import fa.State;
 
 
 public class DFA implements DFAInterface {
-    
-    	/**
+
+
+	//store start state
+	//store final
+	//store alpha
+	//store states
+	//store transitions
+
+	
+
+
+	/**
 	 * Construct the textual representation of the DFA, for example
 	 * A simple two state DFA
 	 * Q = { a b }
