@@ -10,16 +10,18 @@ import fa.State;
 
 public class DFA implements DFAInterface {
 
-	// store start state
-	private Set startSet;
+
+	private DFAState start;
+
 	// store final
-	private Set finalState;
+	private Set<DFAState> finalState;
 	// store alpha
-	private Set alphabet;
+	private Set<Character> alphabet;
 	// store states
-	private Set states;
+	private Set<DFAState> states;
+	
 	// store transitions
-	private HashMap<Set, String> transitions;
+	private HashMap<Character, DFAState> transitions;
 
 	/**
 	 * Construct the textual representation of the DFA, for example
