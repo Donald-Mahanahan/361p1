@@ -4,6 +4,9 @@ import fa.State;
 
 public class DFAState extends State {
 
+<<<<<<< HEAD
     
     
+=======
+>>>>>>> Added Transitions
 }
