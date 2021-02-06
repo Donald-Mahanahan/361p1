@@ -11,118 +11,152 @@ import fa.State;
 public class DFA implements DFAInterface {
 
 	// store start state
-	private Set startState;
+	private DFAState startState;
 	// store final
 	private Set<DFAState> finalState;
 	// store alpha
 	private Set<Character> alphabet;
 	// store states
-	private Set states;
+	private Set<DFAState> states;
 
 	// store transitions
-	private HashMap<HashMap<DFAState, String>, DFAState> transitions;
+	private HashMap<DFAState, HashMap<Character, DFAState>> transitions;
 
 	/**
-	 * Construct the textual representation of the DFA, for example
-	 * A simple two state DFA
-	 * Q = { a b }
-	 * Sigma = { 0 1 }
-	 * delta =
-	 *		0	1	
-	 *	a	a	b	
-	 *	b	a	b	
-	 * q0 = a
-	 * F = { b }
+	 * Construct the textual representation of the DFA, for example A simple two
+	 * state DFA Q = { a b } Sigma = { 0 1 } delta = 0 1 a a b b a b q0 = a F = { b
+	 * }
 	 * 
-	 * The order of the states and the alphabet is the order
-	 * in which they were instantiated in the DFA.
+	 * The order of the states and the alphabet is the order in which they were
+	 * instantiated in the DFA.
+	 * 
 	 * @return String representation of the DFA
 	 */
-	public abstract String toString() {
+	public String toString() {
 
-    }
+	}
 
 	/**
-	 * Simulates a DFA on input s to determine
-	 * whether the DFA accepts s.
+	 * Simulates a DFA on input s to determine whether the DFA accepts s.
+	 * 
 	 * @param s - the input string
 	 * @return true if s in the language of the DFA and false otherwise
 	 */
-	public abstract boolean accepts(String s) {
-
-    }
+	public boolean accepts(String s) {
+		// If our final state set contains the string s return true, otherwise false
+		if (finalState.contains(new DFAState(s))) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Uses transition function delta of FA
-	 * @param from the source state
+	 * 
+	 * @param from   the source state
 	 * @param onSymb the label of the transition
 	 * @return the sink state.
 	 */
-	public abstract State getToState(DFAState from, char onSymb) {
+	public State getToState(DFAState from, char onSymb) {
+		// get the value of the innermap <Character, DFAState>
+		HashMap<Character, DFAState> innerMap = transitions.get(from);
+		// return DFAState from innermap and cast to type State
+		return (State) innerMap.get(onSymb);
 
-    }
+	}
 
 	/**
 	 * Adds the initial state to the DFA instance
 	 * 
 	 * @param name is the label of the start state
 	 */
-	public abstract void addStartState(String name);
+	public void addStartState(String name) {
+		// Create new start state
+		startState = new DFAState(name);
+		// add to states set
+		states.add(startState);
+
+	}
 
 	/**
 	 * Adds a non-final, not initial state to the DFA instance
 	 * 
 	 * @param name is the label of the state
 	 */
-	public abstract void addState(String name);
+	public void addState(String name) {
+		// Adds the DFA state to state set
+		states.add(new DFAState(name));
+
+	}
 
 	/**
 	 * Adds a final state to the DFA
 	 * 
 	 * @param name is the label of the state
 	 */
-	public abstract void addFinalState(String name);
+	public void addFinalState(String name) {
+		finalState.add(new DFAState(name));
+		states.add(new DFAState(name));
+	}
 
 	/**
 	 * Adds the transition to the DFA's delta data structure
+	 * 
 	 * @param fromState is the label of the state where the transition starts
-	 * @param onSymb is the symbol from the DFA's alphabet.
-	 * @param toState is the label of the state where the transition ends
+	 * @param onSymb    is the symbol from the DFA's alphabet.
+	 * @param toState   is the label of the state where the transition ends
 	 */
-	public abstract void addTransition(String fromState, char onSymb, String toState) {
+	public void addTransition(String fromState, char onSymb, String toState) {
+		// Create new HashMap to store inside other map
+		HashMap<Character, DFAState> innerMap = new HashMap<Character, DFAState>();
+		// Put state and sybmol inside inner map
+		innerMap.put(onSymb, new DFAState(fromState));
+		// Add the onSymb to the alphabet if not already added
+		alphabet.add(onSymb);
+		// Put inner map and to state into the transition map
+		transitions.put(new DFAState(toState), innerMap);
 
-    }
+	}
 
 	/**
 	 * Getter for Q
+	 * 
 	 * @return a set of states that FA has
 	 */
-	public abstract Set<? extends State> getStates(){
+	public Set<? extends State> getStates() {
 
-    }
+		return states;
+
+	}
 
 	/**
 	 * Getter for F
+	 * 
 	 * @return a set of final states that FA has
 	 */
-	public abstract Set<? extends State> getFinalStates(){
+	public Set<? extends State> getFinalStates() {
+		return finalState;
 
-    }
+	}
 
 	/**
 	 * Getter for q0
+	 * 
 	 * @return the start state of FA
 	 */
-	public abstract State getStartState(){
+	public State getStartState() {
+		return startState;
 
-    }
+	}
 
 	/**
 	 * Getter for Sigma
+	 * 
 	 * @return the alphabet of FA
 	 */
-	public abstract Set<Character> getABC(){
+	public Set<Character> getABC() {
+		return alphabet;
 
-    }
+	}
 
 }
