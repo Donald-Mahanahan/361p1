@@ -35,22 +35,39 @@ public class DFA implements DFAInterface {
 	 */
 	public String toString() {
 
-		String definition = "Q = {";
+		String definition = "Q = { ";
 		for(DFAState q: states) {
 			definition += q.getName() + " ";
 		}
 
 		definition += "}\n";
-		definition += "Sigma = {";
+		definition += "Sigma = { ";
 
 		for(char sigma: alphabet) {
 			definition += sigma + " ";
 		}
 
 		definition += "}\n";
-		definition += "delta = ";
-
+		definition += "delta = \n\t";
 		
+		for(char sigma: alphabet) {
+			definition += sigma + "  ";
+		}
+
+		/* Trying to test ouput for transitions */
+
+		for(DFAState q: states) {
+			HashMap<Character, DFAState> map = transitions.get(q.getName());
+			definition += q.getName() + " ";
+		}
+
+		for (Map.Entry<Character, DFAState> e : transitions.entrySet()) {
+            System.out.println("Key: " + e.getKey() 
+                               + " Value: " + e.getValue()); 
+    
+		}
+
+		/*****************************************/
 
 		return definition;
 
