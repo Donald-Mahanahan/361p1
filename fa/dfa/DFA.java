@@ -39,13 +39,18 @@ public class DFA implements DFAInterface {
 		for(DFAState q: states) {
 			definition += q.getName() + " ";
 		}
+
 		definition += "}\n";
 		definition += "Sigma = {";
+
 		for(char sigma: alphabet) {
 			definition += sigma + " ";
 		}
+
 		definition += "}\n";
 		definition += "delta = ";
+
+		
 
 		return definition;
 
