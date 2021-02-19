@@ -8,19 +8,20 @@ import java.util.HashSet;
 import java.util.Iterator;
 import fa.State;
 
+
 public class DFA implements DFAInterface {
 
 	// store start state
 	private DFAState startState;
 	// store final
-	private Set<DFAState> finalState;
+	private Set<DFAState> finalState = new HashSet<DFAState>();
 	// store alpha
-	private Set<Character> alphabet;
+	private Set<Character> alphabet = new HashSet<Character>();
 	// store states
-	private Set<DFAState> states;
-
+	private Set<DFAState> states = new HashSet<DFAState>();
 	// store transitions
-	private HashMap<DFAState, HashMap<Character, DFAState>> transitions;
+	private HashMap<DFAState, HashMap<Character, DFAState>> transitions = new HashMap<DFAState, HashMap<Character, DFAState>>();
+
 
 	/**
 	 * Construct the textual representation of the DFA, for example A simple two
@@ -33,6 +34,14 @@ public class DFA implements DFAInterface {
 	 * @return String representation of the DFA
 	 */
 	public String toString() {
+
+		String definition = " Q = {";
+		for(DFAState s: states) {
+			definition += s.getName() + " ";
+		}
+		definition += "}"; 
+
+		return definition;
 
 	}
 
@@ -71,6 +80,7 @@ public class DFA implements DFAInterface {
 	 * @param name is the label of the start state
 	 */
 	public void addStartState(String name) {
+		// startStates = new HashSet<DFAState>();
 		// Create new start state
 		startState = new DFAState(name);
 		// add to states set
@@ -84,6 +94,8 @@ public class DFA implements DFAInterface {
 	 * @param name is the label of the state
 	 */
 	public void addState(String name) {
+
+		states = new HashSet<DFAState>();
 		// Adds the DFA state to state set
 		states.add(new DFAState(name));
 
@@ -95,6 +107,7 @@ public class DFA implements DFAInterface {
 	 * @param name is the label of the state
 	 */
 	public void addFinalState(String name) {
+
 		finalState.add(new DFAState(name));
 		states.add(new DFAState(name));
 	}
