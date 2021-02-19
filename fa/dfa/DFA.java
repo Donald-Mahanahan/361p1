@@ -45,6 +45,7 @@ public class DFA implements DFAInterface {
 			definition += sigma + " ";
 		}
 		definition += "}\n";
+		definition += "delta = ";
 
 		return definition;
 
