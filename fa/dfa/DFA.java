@@ -54,16 +54,15 @@ public class DFA implements DFAInterface {
 			definition += sigma + "  ";
 		}
 
-		/* Trying to test ouput for transitions */
+		/* Trying to test ouput for transitions I just need to play with it a little more */
 
-		for(DFAState q: states) {
-			HashMap<Character, DFAState> map = transitions.get(q.getName());
-			definition += q.getName() + " ";
-		}
+		// for(DFAState q: states) {
+		// 	HashMap<Character, DFAState> map = transitions.get(q.getName());
+		// 	definition += q.getName() + " ";
+		// }
 
-		for (Map.Entry<Character, DFAState> e : transitions.entrySet()) {
-            System.out.println("Key: " + e.getKey() 
-                               + " Value: " + e.getValue()); 
+		for (Map.Entry<DFAState, HashMap<Character, DFAState>> e : transitions.entrySet()) {
+            System.out.println("Key: " + e.getKey() + " Value: " + e.getValue()); 
     
 		}
 
