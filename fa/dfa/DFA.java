@@ -35,11 +35,16 @@ public class DFA implements DFAInterface {
 	 */
 	public String toString() {
 
-		String definition = " Q = {";
-		for(DFAState s: states) {
-			definition += s.getName() + " ";
+		String definition = "Q = {";
+		for(DFAState q: states) {
+			definition += q.getName() + " ";
 		}
-		definition += "}"; 
+		definition += "}\n";
+		definition += "Sigma = {";
+		for(char sigma: alphabet) {
+			definition += sigma + " ";
+		}
+		definition += "}\n";
 
 		return definition;
 
