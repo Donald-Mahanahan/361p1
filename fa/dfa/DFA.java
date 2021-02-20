@@ -40,6 +40,7 @@ public class DFA implements DFAInterface {
 		finalState = new HashSet<DFAState>();
 		alphabet = new HashSet<Character>();
 		states = new HashSet<DFAState>();
+		currentState = startState;
 
 	}
 
@@ -92,22 +93,28 @@ public class DFA implements DFAInterface {
 	 * @return true if s in the language of the DFA and false otherwise
 	 */
 	public boolean accepts(String s) {
+		currentState = startState;
 		if (s.equals("e")) {
 			for (DFAState b : finalState) {
 				if (currentState.getName().equals(b.getName())) {
 					return true;
 				}
+
 			}
 			return false;
+
 		} else
 
 		{
-			DFAState transitionState = (DFAState) getToState(currentState, s.charAt(0));
-			currentState = transitionState;
+			DFAState transitionState;
+			for (int i = 0; i < s.length(); i++) {
+				transitionState = (DFAState) getToState(currentState, s.charAt(i));
+				currentState = transitionState;
+			}
 
 			// If our final state set contains the string s return true, otherwise false
 			for (DFAState b : finalState) {
-				if (transitionState.getName().equals(b.getName())) {
+				if (currentState.getName().equals(b.getName())) {
 					return true;
 				}
 			}
