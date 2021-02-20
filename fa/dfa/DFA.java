@@ -19,7 +19,7 @@ public class DFA implements DFAInterface {
 	// store states
 	private Set<DFAState> states;
 	// store transitions
-	private HashMap<String, HashMap<Character, DFAState>> transitions;
+	private HashMap<DFAState, HashMap<Character, DFAState>> transitions;
 
 	private DFAState currentState;
 
@@ -35,8 +35,8 @@ public class DFA implements DFAInterface {
 	 */
 
 	public DFA() {
-		// Instanitate the map at runtime
-		transitions = new HashMap<String, HashMap<Character, DFAState>>();
+		// Instanitate all private variables at runtime
+		transitions = new HashMap<DFAState, HashMap<Character, DFAState>>();
 		finalState = new HashSet<DFAState>();
 		alphabet = new HashSet<Character>();
 		states = new HashSet<DFAState>();
@@ -75,7 +75,7 @@ public class DFA implements DFAInterface {
 		// definition += q.getName() + " ";
 		// }
 
-		for (Map.Entry<String, HashMap<Character, DFAState>> e : transitions.entrySet()) {
+		for (Map.Entry<DFAState, HashMap<Character, DFAState>> e : transitions.entrySet()) {
 			System.out.println("Key: " + e.getKey() + " Value: " + e.getValue());
 
 		}
@@ -94,9 +94,10 @@ public class DFA implements DFAInterface {
 	 */
 	public boolean accepts(String s) {
 		currentState = startState;
+		// Empty string
 		if (s.equals("e")) {
 			for (DFAState b : finalState) {
-				if (currentState.getName().equals(b.getName())) {
+				if (currentState.equals(b)) {
 					return true;
 				}
 
@@ -107,6 +108,7 @@ public class DFA implements DFAInterface {
 
 		{
 			DFAState transitionState;
+			// Goes character by character through the given string
 			for (int i = 0; i < s.length(); i++) {
 				transitionState = (DFAState) getToState(currentState, s.charAt(i));
 				currentState = transitionState;
@@ -114,7 +116,7 @@ public class DFA implements DFAInterface {
 
 			// If our final state set contains the string s return true, otherwise false
 			for (DFAState b : finalState) {
-				if (currentState.getName().equals(b.getName())) {
+				if (currentState.equals(b)) {
 					return true;
 				}
 			}
@@ -133,7 +135,7 @@ public class DFA implements DFAInterface {
 	public State getToState(DFAState from, char onSymb) {
 		// get the value of the innermap <Character, DFAState>
 		HashMap<Character, DFAState> innerMap = new HashMap<Character, DFAState>();
-		innerMap = transitions.get(from.getName());
+		innerMap = transitions.get(from);
 		// return DFAState from innermap and cast to type State
 		return (State) innerMap.get(onSymb);
 
@@ -190,8 +192,8 @@ public class DFA implements DFAInterface {
 		alphabet.add(onSymb);
 		// Put inner map and to state into the transition map
 		HashMap<Character, DFAState> innerMap = new HashMap<Character, DFAState>();
-		if (transitions.containsKey(fromState)) {
-			innerMap = transitions.get(fromState);
+		if (transitions.containsKey(new DFAState(fromState))) {
+			innerMap = transitions.get(new DFAState(fromState));
 			innerMap.put(onSymb, new DFAState(toState));
 
 		} else {
@@ -200,7 +202,7 @@ public class DFA implements DFAInterface {
 			// Add the onSymb to the alphabet if not already added
 
 		}
-		transitions.put(fromState, innerMap);
+		transitions.put(new DFAState(fromState), innerMap);
 
 	}
 
