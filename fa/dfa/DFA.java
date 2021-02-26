@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import fa.State;
+import java.util.LinkedHashSet; 
 
 public class DFA implements DFAInterface {
 
@@ -37,9 +38,9 @@ public class DFA implements DFAInterface {
 	public DFA() {
 		// Instanitate all private variables at runtime
 		transitions = new HashMap<DFAState, HashMap<Character, DFAState>>();
-		finalState = new HashSet<DFAState>();
-		alphabet = new HashSet<Character>();
-		states = new HashSet<DFAState>();
+		finalState = new LinkedHashSet<DFAState>();
+		alphabet = new LinkedHashSet<Character>();
+		states = new LinkedHashSet<DFAState>();
 		currentState = startState;
 
 	}
@@ -62,7 +63,8 @@ public class DFA implements DFAInterface {
 		definition += "delta = \n\t";
 
 		for (char sigma : alphabet) {
-			definition += sigma + "  ";
+			definition += "\t";
+			definition += sigma ;
 		}
 
 		/*
@@ -70,19 +72,45 @@ public class DFA implements DFAInterface {
 		 * more
 		 */
 
-		// for(DFAState q: states) {
-		// HashMap<Character, DFAState> map = transitions.get(q.getName());
-		// definition += q.getName() + " ";
-		// }
+		definition += "\n";
 
-		for (Map.Entry<DFAState, HashMap<Character, DFAState>> e : transitions.entrySet()) {
-			System.out.println("Key: " + e.getKey() + " Value: " + e.getValue());
+		for(DFAState q: states) {
 
+			definition += "\t";
+
+			HashMap<Character, DFAState> map = transitions.get(q);
+			
+			definition += q.getName() + "\t";
+
+			Set set = map.entrySet();
+			Iterator iterator = set.iterator();
+
+			while(iterator.hasNext()) {
+				Map.Entry mentry = (Map.Entry)iterator.next();
+				definition += mentry.getValue() + "\t";
+			}
+
+			definition += "\n";
+		
 		}
 
-		/*****************************************/
+		definition += "q0 = " + startState + "\n";
+
+		definition += "F = { " + getFinalStateString(finalState) + "}";
+
 
 		return definition;
+	}
+
+	public String getFinalStateString(Set<DFAState> finalStates) {
+		
+		String finalStatesString = "";
+		
+		for(DFAState s: finalStates) {
+			finalStatesString += s.getName() + " ";
+		}
+
+		return finalStatesString;
 
 	}
 
@@ -164,7 +192,6 @@ public class DFA implements DFAInterface {
 	 */
 	public void addState(String name) {
 
-		states = new HashSet<DFAState>();
 		// Adds the DFA state to state set
 		states.add(new DFAState(name));
 
