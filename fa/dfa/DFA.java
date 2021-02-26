@@ -67,11 +67,6 @@ public class DFA implements DFAInterface {
 			definition += sigma ;
 		}
 
-		/*
-		 * Trying to test ouput for transitions I just need to play with it a little
-		 * more
-		 */
-
 		definition += "\n";
 
 		for(DFAState q: states) {
@@ -95,9 +90,7 @@ public class DFA implements DFAInterface {
 		}
 
 		definition += "q0 = " + startState + "\n";
-
 		definition += "F = { " + getFinalStateString(finalState) + "}";
-
 
 		return definition;
 	}
