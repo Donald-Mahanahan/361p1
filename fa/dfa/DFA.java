@@ -21,19 +21,8 @@ public class DFA implements DFAInterface {
 	private Set<DFAState> states;
 	// store transitions
 	private HashMap<DFAState, HashMap<Character, DFAState>> transitions;
-
+	// store currentState
 	private DFAState currentState;
-
-	/**
-	 * Construct the textual representation of the DFA, for example A simple two
-	 * state DFA Q = { a b } Sigma = { 0 1 } delta = 0 1 a a b b a b q0 = a F = { b
-	 * }
-	 * 
-	 * The order of the states and the alphabet is the order in which they were
-	 * instantiated in the DFA.
-	 * 
-	 * @return String representation of the DFA
-	 */
 
 	public DFA() {
 		// Instanitate all private variables at runtime
@@ -94,7 +83,12 @@ public class DFA implements DFAInterface {
 
 		return definition;
 	}
-
+	
+	/**
+	 * To String helper method
+	 * 
+	 * @return a string with the names of final states
+	 */
 	public String getFinalStateString(Set<DFAState> finalStates) {
 		
 		String finalStatesString = "";
@@ -107,12 +101,6 @@ public class DFA implements DFAInterface {
 
 	}
 
-	/**
-	 * Simulates a DFA on input s to determine whether the DFA accepts s.
-	 * 
-	 * @param s - the input string
-	 * @return true if s in the language of the DFA and false otherwise
-	 */
 	public boolean accepts(String s) {
 		currentState = startState;
 		// Empty string
@@ -121,7 +109,6 @@ public class DFA implements DFAInterface {
 				if (currentState.equals(b)) {
 					return true;
 				}
-
 			}
 			return false;
 
@@ -143,16 +130,8 @@ public class DFA implements DFAInterface {
 			}
 			return false;
 		}
-
 	}
 
-	/**
-	 * Uses transition function delta of FA
-	 * 
-	 * @param from   the source state
-	 * @param onSymb the label of the transition
-	 * @return the sink state.
-	 */
 	public State getToState(DFAState from, char onSymb) {
 		// get the value of the innermap <Character, DFAState>
 		HashMap<Character, DFAState> innerMap = new HashMap<Character, DFAState>();
@@ -162,11 +141,6 @@ public class DFA implements DFAInterface {
 
 	}
 
-	/**
-	 * Adds the initial state to the DFA instance
-	 * 
-	 * @param name is the label of the start state
-	 */
 	public void addStartState(String name) {
 		// startStates = new HashSet<DFAState>();
 		// Create new start state
@@ -178,11 +152,6 @@ public class DFA implements DFAInterface {
 
 	}
 
-	/**
-	 * Adds a non-final, not initial state to the DFA instance
-	 * 
-	 * @param name is the label of the state
-	 */
 	public void addState(String name) {
 
 		// Adds the DFA state to state set
@@ -190,24 +159,13 @@ public class DFA implements DFAInterface {
 
 	}
 
-	/**
-	 * Adds a final state to the DFA
-	 * 
-	 * @param name is the label of the state
-	 */
+
 	public void addFinalState(String name) {
 
 		finalState.add(new DFAState(name));
 		states.add(new DFAState(name));
 	}
 
-	/**
-	 * Adds the transition to the DFA's delta data structure
-	 * 
-	 * @param fromState is the label of the state where the transition starts
-	 * @param onSymb    is the symbol from the DFA's alphabet.
-	 * @param toState   is the label of the state where the transition ends
-	 */
 	public void addTransition(String fromState, char onSymb, String toState) {
 		alphabet.add(onSymb);
 		// Put inner map and to state into the transition map
