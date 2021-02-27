@@ -12,7 +12,7 @@ This program parses input given through a text file and outputs a description to
 
 From the directory compile using: $javac fa/dfa/DFADriver.java
 
-From the directory run the following command: $java fa/dfa/DFADriver <testfile>
+From the directory run the following command: $java fa/dfa/DFADriver {testfile}
 
 testfiles included in the project are: p1tc1.txt, p1tc2.txt, p1tc3.txt
 
