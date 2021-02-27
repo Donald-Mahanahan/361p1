@@ -2,7 +2,7 @@
 
 * Author: Aiden Leuck, Zach Sherwood
 * Class: CS361 Section 003
-* Semester: Spring 2016
+* Semester: Spring 2021
 
 ## Overview
 
