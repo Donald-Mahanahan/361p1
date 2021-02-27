@@ -54,6 +54,7 @@ or text book you need to list them here. If you looked something up on
 stackoverflow.com and fail to cite it in this section it will be
 considered plagiarism and be dealt with accordingly. So be safe CITE!
 [Here is some help creating links](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links)
+
 * [Used to help learn how to iterate through a hashmap]https://www.geeksforgeeks.org/iterate-map-java/
 * [Used to help learn more about a linkedHashSet]https://www.geeksforgeeks.org/iterate-map-java/, https://docs.oracle.com/javase/7/docs/api/java/util/LinkedHashSet.html
 
