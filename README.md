@@ -54,7 +54,7 @@ or text book you need to list them here. If you looked something up on
 stackoverflow.com and fail to cite it in this section it will be
 considered plagiarism and be dealt with accordingly. So be safe CITE!
 [Here is some help creating links](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links)
-[Used to help learn how to iterate through a hashmap]https://www.geeksforgeeks.org/iterate-map-java/
+* [Used to help learn how to iterate through a hashmap]https://www.geeksforgeeks.org/iterate-map-java/
 
 ----------
 This README template is using Markdown. To preview your README output, you can copy your file contents to a Markdown editor/previewer such as [https://stackedit.io/editor](https://stackedit.io/editor).
