@@ -55,6 +55,7 @@ stackoverflow.com and fail to cite it in this section it will be
 considered plagiarism and be dealt with accordingly. So be safe CITE!
 [Here is some help creating links](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links)
 * [Used to help learn how to iterate through a hashmap]https://www.geeksforgeeks.org/iterate-map-java/
+* [Used to help learn more about a linkedHashSet]https://www.geeksforgeeks.org/iterate-map-java/, https://docs.oracle.com/javase/7/docs/api/java/util/LinkedHashSet.html
 
 ----------
 This README template is using Markdown. To preview your README output, you can copy your file contents to a Markdown editor/previewer such as [https://stackedit.io/editor](https://stackedit.io/editor).
