@@ -66,12 +66,12 @@ public class DFA implements DFAInterface {
 			
 			definition += q.getName() + "\t";
 
-			Set set = map.entrySet();
-			Iterator iterator = set.iterator();
+			Set newSet = map.entrySet();
+			Iterator iterator = newSet.iterator();
 
 			while(iterator.hasNext()) {
-				Map.Entry mentry = (Map.Entry)iterator.next();
-				definition += mentry.getValue() + "\t";
+				Map.Entry mapEntry = (Map.Entry)iterator.next();
+				definition += mapEntry.getValue() + "\t";
 			}
 
 			definition += "\n";
