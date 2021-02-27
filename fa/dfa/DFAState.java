@@ -2,16 +2,37 @@ package fa.dfa;
 
 import fa.State;
 
+/**
+ * Represents a DFAState and holds various properties associated with said
+ * state.
+ * 
+ * @author Aidan Leuck, Zach Sherwood
+ */
 public class DFAState extends State {
-
+    /**
+     * Constructor for the DFAState
+     * 
+     * @param name - The name of the DFA state
+     */
     public DFAState(String name) {
         this.name = name;
     }
 
+    /**
+     * gets the name of the state
+     * 
+     * @return : Name of the state
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Override of the equals method, checks for equality of name
+     * 
+     * @param obj: Object to compare equality to this
+     * @return true if object is equal false if not
+     */
     public boolean equals(Object obj) {
         // If object reference is null
         if (obj == null) {
@@ -29,7 +50,11 @@ public class DFAState extends State {
         }
     }
 
-    // Overrides hashcode to return the name of the string's hashcode.
+    /**
+     * Override hashcode
+     * 
+     * @return the value of the name's hashcode
+     */
     public int hashCode() {
         return this.name.hashCode();
     }

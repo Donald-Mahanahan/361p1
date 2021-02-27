@@ -7,7 +7,15 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import fa.State;
-import java.util.LinkedHashSet; 
+import java.util.LinkedHashSet;
+
+/**
+ * DFA implementation that takes an input of transitions and states and outputs
+ * a text based representation of the DFA states and transitions Given a list of
+ * transitions it can determine whether a given string is valid.
+ * 
+ * @author Aidan Leuck, Zach Sherwood
+ */
 
 public class DFA implements DFAInterface {
 
@@ -24,6 +32,9 @@ public class DFA implements DFAInterface {
 	// store currentState
 	private DFAState currentState;
 
+	/**
+	 * Constructor for DFA, initializes all of the member variables
+	 */
 	public DFA() {
 		// Instanitate all private variables at runtime
 		transitions = new HashMap<DFAState, HashMap<Character, DFAState>>();
@@ -34,6 +45,11 @@ public class DFA implements DFAInterface {
 
 	}
 
+	/**
+	 * Class toString method
+	 * 
+	 * @return a string that represents the created DFA
+	 */
 	public String toString() {
 
 		String definition = "Q = { ";
@@ -53,29 +69,29 @@ public class DFA implements DFAInterface {
 
 		for (char sigma : alphabet) {
 			definition += "\t";
-			definition += sigma ;
+			definition += sigma;
 		}
 
 		definition += "\n";
 
-		for(DFAState q: states) {
+		for (DFAState q : states) {
 
 			definition += "\t";
 
 			HashMap<Character, DFAState> map = transitions.get(q);
-			
+
 			definition += q.getName() + "\t";
 
 			Set newSet = map.entrySet();
 			Iterator iterator = newSet.iterator();
 
-			while(iterator.hasNext()) {
-				Map.Entry mapEntry = (Map.Entry)iterator.next();
+			while (iterator.hasNext()) {
+				Map.Entry mapEntry = (Map.Entry) iterator.next();
 				definition += mapEntry.getValue() + "\t";
 			}
 
 			definition += "\n";
-		
+
 		}
 
 		definition += "q0 = " + startState + "\n";
@@ -83,17 +99,17 @@ public class DFA implements DFAInterface {
 
 		return definition;
 	}
-	
+
 	/**
 	 * To String helper method
 	 * 
 	 * @return a string with the names of final states
 	 */
 	public String getFinalStateString(Set<DFAState> finalStates) {
-		
+
 		String finalStatesString = "";
-		
-		for(DFAState s: finalStates) {
+
+		for (DFAState s : finalStates) {
 			finalStatesString += s.getName() + " ";
 		}
 
@@ -101,6 +117,13 @@ public class DFA implements DFAInterface {
 
 	}
 
+	/**
+	 * Determines whether a given string is in the language of the DFA
+	 * 
+	 * @param s String to test if it is in the given language.
+	 * @return a boolean, true if the string is in the language, false otherwise
+	 * 
+	 */
 	public boolean accepts(String s) {
 		currentState = startState;
 		// Empty string
@@ -132,6 +155,14 @@ public class DFA implements DFAInterface {
 		}
 	}
 
+	/**
+	 * Moves from one state to the next based off of the given alphabet symbol, and
+	 * desired state
+	 * 
+	 * @param from   - State to transition from
+	 * @param onSymb alphabet symbol to transition from
+	 * @return The state transitioned to
+	 */
 	public State getToState(DFAState from, char onSymb) {
 		// get the value of the innermap <Character, DFAState>
 		HashMap<Character, DFAState> innerMap = new HashMap<Character, DFAState>();
@@ -141,6 +172,11 @@ public class DFA implements DFAInterface {
 
 	}
 
+	/**
+	 * Sets the start state
+	 * 
+	 * @param name of the start state
+	 */
 	public void addStartState(String name) {
 		// startStates = new HashSet<DFAState>();
 		// Create new start state
@@ -152,6 +188,11 @@ public class DFA implements DFAInterface {
 
 	}
 
+	/**
+	 * Adds a new state to the set of states
+	 * 
+	 * @param name - Name of the state to be added
+	 */
 	public void addState(String name) {
 
 		// Adds the DFA state to state set
@@ -159,13 +200,25 @@ public class DFA implements DFAInterface {
 
 	}
 
-
+	/**
+	 * Adds a new state to the set of final states
+	 * 
+	 * @param name - Name of the final state
+	 */
 	public void addFinalState(String name) {
 
 		finalState.add(new DFAState(name));
 		states.add(new DFAState(name));
 	}
 
+	/**
+	 * Adds a new transition to the set of transitions.
+	 * 
+	 * @param fromState - The state to start from
+	 * @param onSymb    - The symbol on which to transition
+	 * @param toState   - The state to transition to on said symbol
+	 * 
+	 */
 	public void addTransition(String fromState, char onSymb, String toState) {
 		alphabet.add(onSymb);
 		// Put inner map and to state into the transition map
